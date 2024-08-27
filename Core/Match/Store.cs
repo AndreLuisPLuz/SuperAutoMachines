@@ -7,28 +7,51 @@ namespace SuperAutoMachines.Core.Match
     {
         private static Store store;
 
-        public BaseMachine?[] MachinesOnSale { get; set; } = new BaseMachine[3];
+        public GeneratorTier MaxTier { get; set; }
+        public int MachinesCount { get; set; }
+        public BaseMachine?[] MachinesOnSale { get; set; }
 
-        private Store(GeneratorTier tier)
+        private Store()
         {
-            for (int i = 0; i < 3; i++)
-                MachinesOnSale[i] = MachineGenerator.Tier(tier).RandomMachine();
+            MaxTier = GeneratorTier.ONE;
+            MachinesCount = 3;
+
+            GenerateMachinesOnSale();
+        }
+
+        public static Store GetInstance()
+        {
+            store ??= new();
+            return store;
         }
 
         public BaseMachine BuyMachine(int index)
         {
-            var machine = MachinesOnSale[index] ?? throw new NullReferenceException("aaa");
+            var machine = MachinesOnSale[index] ?? throw new NullReferenceException("No machine on this position.");
+
+            MachinesOnSale[index] = null;
+            MachinesCount -= 1;
 
             GameMatch.GetInstance().Coins -= 3;
-            MachinesOnSale[index] = null;
 
             return machine;
         }
 
-        public static Store GetInstance(GeneratorTier tier)
+        public void Reroll()
         {
-            store = new(tier);
-            return store;
+            GameMatch.GetInstance().Coins -= 1;
+            GenerateMachinesOnSale();
+        }
+
+        private void GenerateMachinesOnSale()
+        {
+            MachinesOnSale = new BaseMachine?[MachinesCount];
+            
+            for (int i = 0; i < MachinesCount; i++)
+            {
+                var tierToGenerate = (GeneratorTier) Random.Shared.Next(1, (int) MaxTier);
+                MachinesOnSale[i] = MachineGenerator.Tier(tierToGenerate).RandomMachine();
+            }
         }
     }
 }
