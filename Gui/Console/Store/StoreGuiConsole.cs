@@ -55,7 +55,7 @@ namespace SuperAutoMachines.Gui.Console.Store
             var coins = GameMatch.GetInstance().Coins;
             System.Console.WriteLine($"{coins} Coins");
 
-            System.Console.Write("\n\nYour team: ");
+            System.Console.WriteLine("\nYour team:");
 
             var team = GameMatch.GetInstance().PlayerTeam;
             foreach (var machine in team)
@@ -64,7 +64,7 @@ namespace SuperAutoMachines.Gui.Console.Store
                 System.Console.Write($"{representation}\t");
             }
 
-            System.Console.Write("\n\nMachines on sale: ");
+            System.Console.WriteLine("\n\nMachines on sale:");
 
             var store = GameStore.GetInstance().MachinesOnSale;
             foreach (var machine in store)
@@ -94,17 +94,19 @@ namespace SuperAutoMachines.Gui.Console.Store
             var coins = GameMatch.GetInstance().Coins;
             System.Console.WriteLine($"{coins} Coins");
 
-            System.Console.Write("\n\nMachines on sale: ");
+            System.Console.WriteLine("\nMachines on sale:");
 
             var store = GameStore.GetInstance().MachinesOnSale;
             for (int i = 0; i < store.Length; i++)
             {
-                string representation = store[i]?.Name ?? "empty";
-                string description = store[i]?.Description ?? "no special ability";
-                int attack = store[i]?.Attack ?? 0;
-                int health = store[i]?.Health ?? 0;
+                var machine = store[i];
 
-                if (store[i] is not null)
+                string representation = machine?.Name ?? "empty";
+                string description = machine?.Description ?? "no special ability";
+                int attack = machine?.Attack ?? 0;
+                int health = machine?.Health ?? 0;
+
+                if (machine is not null)
                 {
                     var machineButton = new ConsoleButton(i+1, representation, new BuyCommand(i));
                     buyButtonMap.Add(machineButton.Option, machineButton);
@@ -132,20 +134,22 @@ namespace SuperAutoMachines.Gui.Console.Store
             System.Console.Clear();
             System.Console.WriteLine($"=================================== STORE ===================================");
 
-            System.Console.Write("\nYour team: ");
+            System.Console.WriteLine("\nYour team:");
 
             var team = GameMatch.GetInstance().PlayerTeam;
             var spotsMap = new Dictionary<int, ConsoleButton>();
 
             for (int i = 0; i < team.Length; i++)
             {
-                if (team[i] is null)
+                var machine = team[i];
+
+                if (machine is null)
                 {
                     var spotButton = new ConsoleButton(i+1, "Place it here.", new AssignCommand(i));
                     spotsMap.Add(spotButton.Option, spotButton);
                 }
 
-                string representation = team[i].Name ?? "[empty]";
+                string representation = machine?.Name ?? "[empty]";
                 System.Console.Write($"{representation}\t");
             }
 
@@ -168,7 +172,7 @@ namespace SuperAutoMachines.Gui.Console.Store
             System.Console.Clear();
             System.Console.WriteLine($"=================================== STORE ===================================");
 
-            System.Console.Write("\nYour team: ");
+            System.Console.WriteLine("\nYour team:");
 
             var team = GameMatch.GetInstance().PlayerTeam;
             for (int i = 0; i < team.Length; i++)
