@@ -4,7 +4,7 @@ namespace SuperAutoMachines.Core.Battle.Generator
 {
     public abstract class Generator
     {
-        protected static List<BaseMachine> possibleMachines = new();
+        protected List<Func<BaseMachine>> possibleMachines = new();
 
         protected abstract void Fill();
 
@@ -14,7 +14,7 @@ namespace SuperAutoMachines.Core.Battle.Generator
                 Fill();
 
             int randomNumber = Random.Shared.Next(0, possibleMachines.Count);
-            return possibleMachines[randomNumber];
+            return possibleMachines[randomNumber]();
         }
     }
 }

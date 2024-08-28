@@ -7,9 +7,10 @@ namespace SuperAutoMachines.Core.Battle.Generator
     {
         protected override void Fill()
         {
-            possibleMachines.Add(new Belt());
-            possibleMachines.Add(new Hammer());
-            possibleMachines.Add(new Screwdriver());
+            possibleMachines.Clear();
+            possibleMachines.Add(() => new Belt());
+            possibleMachines.Add(() => new Hammer());
+            possibleMachines.Add(() => new Screwdriver());
         }
     }
 }
