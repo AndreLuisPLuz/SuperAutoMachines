@@ -3,15 +3,15 @@ using SuperAutoMachines.Core.Machine;
 
 namespace SuperAutoMachines.Core.Match
 {
-    public class Store
+    public class GameStore
     {
-        private static Store store;
+        private static GameStore store;
 
         public GeneratorTier MaxTier { get; set; }
         public int MachinesCount { get; set; }
         public BaseMachine?[] MachinesOnSale { get; set; }
 
-        private Store()
+        private GameStore()
         {
             MaxTier = GeneratorTier.ONE;
             MachinesCount = 3;
@@ -19,7 +19,7 @@ namespace SuperAutoMachines.Core.Match
             GenerateMachinesOnSale();
         }
 
-        public static Store GetInstance()
+        public static GameStore GetInstance()
         {
             store ??= new();
             return store;

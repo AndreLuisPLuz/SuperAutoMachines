@@ -17,7 +17,7 @@ namespace SuperAutoMachines.Core.Match
         private GameMatch()
         {
             Coins = 10;
-            Hearts = 0;
+            Hearts = 5;
             Trophies = 0;
             Round = 1;
 
