@@ -51,7 +51,11 @@ namespace SuperAutoMachines.Gui.Console.Store
         {
             System.Console.Clear();
             System.Console.WriteLine($"=================================== STORE ===================================");
-            System.Console.Write("\nYour team: ");
+
+            var coins = GameMatch.GetInstance().Coins;
+            System.Console.WriteLine($"{coins} Coins");
+
+            System.Console.Write("\n\nYour team: ");
 
             var team = GameMatch.GetInstance().PlayerTeam;
             foreach (var machine in team)
@@ -86,6 +90,9 @@ namespace SuperAutoMachines.Gui.Console.Store
         {
             System.Console.Clear();
             System.Console.WriteLine($"=================================== STORE ===================================");
+
+            var coins = GameMatch.GetInstance().Coins;
+            System.Console.WriteLine($"{coins} Coins");
 
             System.Console.Write("\n\nMachines on sale: ");
 
