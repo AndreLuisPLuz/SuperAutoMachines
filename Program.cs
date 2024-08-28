@@ -3,6 +3,7 @@ using SuperAutoMachines.Core.Machine;
 using SuperAutoMachines.Core.Machine.Types;
 using SuperAutoMachines.Core.Battle.Generator;
 using SuperAutoMachines.Gui.Console;
+using SuperAutoMachines.Gui.Console.Match;
 
-var gui = new MatchGuiConsole();
-gui.DrawMenuAndAwait();
+var gui = MatchGuiConsole.GetInstance();
+await gui.DrawMenuAndAwait();

@@ -29,5 +29,13 @@ namespace SuperAutoMachines.Core.Match
             match ??= new();
             return match;
         }
+
+        public void AddMachineToTeam(BaseMachine machine, int position)
+        {
+            if (PlayerTeam[position] is not null)
+                throw new InvalidOperationException("Spot already occupied!");
+            
+            PlayerTeam[position] = machine;
+        }
     }
 }

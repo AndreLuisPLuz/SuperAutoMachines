@@ -1,11 +1,22 @@
 
+using SuperAutoMachines.Core.Machine;
+using SuperAutoMachines.Core.Match;
+
 namespace SuperAutoMachines.Gui.Console.Store.Commands
 {
     public class BuyCommand : ICommand
     {
-        public Task Execute()
+        private readonly int indexToBuy;
+
+        public BuyCommand(int indexToBuy)
         {
-            throw new NotImplementedException();
+            this.indexToBuy = indexToBuy;
+        }
+
+        public async Task Execute()
+        {
+            AssignCommand.Machine = GameStore.GetInstance().BuyMachine(indexToBuy);
+            await StoreGuiConsole.GetInstance().DrawMachineAssignAndAwait();
         }
     }
 }

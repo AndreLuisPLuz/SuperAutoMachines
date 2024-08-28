@@ -1,10 +1,12 @@
+using SuperAutoMachines.Gui.Console.Match;
+
 namespace SuperAutoMachines.Gui.Console.Store.Commands
 {
     public class MatchGotoCommand : ICommand
     {
-        public Task Execute()
+        public async Task Execute()
         {
-            throw new NotImplementedException();
+            await MatchGuiConsole.GetInstance().DrawMenuAndAwait();
         }
     }
 }

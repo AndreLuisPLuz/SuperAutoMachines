@@ -7,7 +7,7 @@ namespace SuperAutoMachines.Gui.Console.Store
 {
     public class StoreGuiConsole : IStoreGui
     {
-        private static StoreGuiConsole console;
+        private static StoreGuiConsole? console;
 
         private readonly Dictionary<int, ConsoleButton> menuButtonMap = new();
         private readonly Dictionary<int, ConsoleButton> buyButtonMap = new();
@@ -15,6 +15,7 @@ namespace SuperAutoMachines.Gui.Console.Store
 
         private readonly ConsoleButton buyMenuButton;
         private readonly ConsoleButton sellMenuButton;
+        private readonly ConsoleButton rerollButton;
         private readonly ConsoleButton gobackButton;
 
         private readonly ConsoleButton cancelBuyButton;
@@ -25,10 +26,12 @@ namespace SuperAutoMachines.Gui.Console.Store
         {
             buyMenuButton = new ConsoleButton(1, "Buy new machine.", new OpenBuyMenuCommand());
             sellMenuButton = new ConsoleButton(2, "Sell a machine.", new OpenSellMenuCommand());
+            rerollButton = new ConsoleButton(3, "Reroll machines on sale.", new RerollCommand());
             gobackButton = new ConsoleButton(9, "Go back.", new MatchGotoCommand());
 
             menuButtonMap.Add(buyMenuButton.Option, buyMenuButton);
             menuButtonMap.Add(sellMenuButton.Option, sellMenuButton);
+            menuButtonMap.Add(rerollButton.Option, rerollButton);
             menuButtonMap.Add(gobackButton.Option, gobackButton);
 
             cancelBuyButton = new ConsoleButton(9, "Go back.", new StartGotoCommand());
@@ -69,6 +72,7 @@ namespace SuperAutoMachines.Gui.Console.Store
             System.Console.WriteLine("\n\n=================================== OPTIONS ===================================");
             buyMenuButton.Draw();
             sellMenuButton.Draw();
+            rerollButton.Draw();
             gobackButton.Draw();
 
             int option = Int32.Parse(System.Console.ReadLine());
@@ -95,7 +99,7 @@ namespace SuperAutoMachines.Gui.Console.Store
 
                 if (store[i] is not null)
                 {
-                    var machineButton = new ConsoleButton(i+1, representation, new BuyCommand());
+                    var machineButton = new ConsoleButton(i+1, representation, new BuyCommand(i));
                     buyButtonMap.Add(machineButton.Option, machineButton);
                 }
 
@@ -130,7 +134,7 @@ namespace SuperAutoMachines.Gui.Console.Store
             {
                 if (team[i] is null)
                 {
-                    var spotButton = new ConsoleButton(i+1, "Place it here.", new AssingCommand());
+                    var spotButton = new ConsoleButton(i+1, "Place it here.", new AssignCommand(i));
                     spotsMap.Add(spotButton.Option, spotButton);
                 }
 
@@ -169,7 +173,7 @@ namespace SuperAutoMachines.Gui.Console.Store
 
                 if (team[i] is not null)
                 {
-                    var machineButton = new ConsoleButton(i+1, representation, new BuyCommand());
+                    var machineButton = new ConsoleButton(i+1, representation, new BuyCommand(i));
                     sellButtonMap.Add(machineButton.Option, machineButton);
                 }
 
