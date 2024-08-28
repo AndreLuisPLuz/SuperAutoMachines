@@ -17,7 +17,7 @@ namespace SuperAutoMachines.Gui.Console.Store.Commands
         public async Task Execute()
         {
             if (Machine is not null)
-                GameMatch.GetInstance().AddMachineToTeam(Machine, indexToAssign);
+                GameMatch.GetInstance().AddMachine(Machine, indexToAssign);
             
             await StoreGuiConsole.GetInstance().DrawMenuAndAwait();
         }

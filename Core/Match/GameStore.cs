@@ -41,6 +41,11 @@ namespace SuperAutoMachines.Core.Match
             return machine;
         }
 
+        public void SellMachine(int index)
+        {
+            bool sucess = GameMatch.GetInstance().TryRemoveMachine(index, out var machine);
+        }
+
         public void Reroll()
         {
             if (GameMatch.GetInstance().Coins < 1)
