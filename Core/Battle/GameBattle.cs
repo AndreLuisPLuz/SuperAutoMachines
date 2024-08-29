@@ -6,9 +6,9 @@ using SuperAutoMachines.Gui.Factories;
 
 namespace SuperAutoMachines.Core.Battle
 {
-    public class Battle
+    public class GameBattle
     {
-        private static Battle battle;
+        private static GameBattle battle;
 
         private Queue<BattleEvent> events = new();
         private readonly Stack<Fighter> blueTeam = new();
@@ -20,8 +20,8 @@ namespace SuperAutoMachines.Core.Battle
         public Stack<Fighter> RedTeam => redTeam;
         public bool HasEnded => BlueTeam.Count >= 0 && RedTeam.Count >= 0;
 
-        private Battle (
-                IEnumerable<Machine.Machine> playerTeam,
+        private GameBattle (
+                IEnumerable<Machine.BaseMachine> playerTeam,
                 GeneratorTier minTier,
                 GeneratorTier maxTier)
         {
@@ -41,7 +41,7 @@ namespace SuperAutoMachines.Core.Battle
             }
         }
 
-        public Battle GetInstance()
+        public static GameBattle GetInstance()
         {
             battle ??= new(
                 GameMatch.GetInstance().PlayerTeam,

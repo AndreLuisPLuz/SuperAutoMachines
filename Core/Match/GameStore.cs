@@ -9,14 +9,14 @@ namespace SuperAutoMachines.Core.Match
 
         public GeneratorTier MaxTier { get; set; }
         public int MachinesCount { get; set; }
-        public Machine.Machine?[] MachinesOnSale { get; set; }
+        public BaseMachine?[] MachinesOnSale { get; set; }
 
         private GameStore()
         {
             MaxTier = GeneratorTier.ONE;
             MachinesCount = 3;
 
-            MachinesOnSale = new Machine.Machine?[MachinesCount];
+            MachinesOnSale = new BaseMachine?[MachinesCount];
             GenerateMachinesOnSale();
         }
 
@@ -26,7 +26,7 @@ namespace SuperAutoMachines.Core.Match
             return store;
         }
 
-        public Machine.Machine BuyMachine(int index)
+        public BaseMachine BuyMachine(int index)
         {
             var machine = MachinesOnSale[index] ?? throw new NullReferenceException("No machine on this position.");
 
@@ -59,7 +59,7 @@ namespace SuperAutoMachines.Core.Match
 
             GameMatch.GetInstance().Coins -= 1;
 
-            MachinesOnSale = new Machine.Machine?[MachinesCount];
+            MachinesOnSale = new Machine.BaseMachine?[MachinesCount];
             GenerateMachinesOnSale();
         }
 

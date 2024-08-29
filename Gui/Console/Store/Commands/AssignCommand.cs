@@ -7,7 +7,7 @@ namespace SuperAutoMachines.Gui.Console.Store.Commands
     public class AssignCommand : ICommand
     {
         private readonly int indexToAssign;
-        public static Machine? Machine { get; set; } = null;
+        public static BaseMachine? Machine { get; set; } = null;
 
         public AssignCommand(int indexToAssign)
         {
