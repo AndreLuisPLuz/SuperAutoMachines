@@ -1,6 +1,6 @@
 using SuperAutoMachines.Core.Battle;
 
-namespace SuperAutoMachines.Core.Machine.Types
+namespace SuperAutoMachines.Core.Machine.Types.TierOne
 {
     public class Drill : BaseMachine
     {

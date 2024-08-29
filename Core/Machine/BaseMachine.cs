@@ -12,7 +12,7 @@ namespace SuperAutoMachines.Core.Machine
         public int Tier { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }
-        public bool IsCpuMachine { get; private set; }
+        public bool IsCpuMachine { get; set; }
 
         public BaseMachine(bool isCpu)
         {

@@ -1,9 +1,9 @@
-using SuperAutoMachines.Core.Machine;
-using SuperAutoMachines.Core.Machine.Types;
+using SuperAutoMachines.Core.Battle.Generator;
+using SuperAutoMachines.Core.Machine.Types.TierOne;
 
-namespace SuperAutoMachines.Core.Battle.Generator
+namespace SuperAutoMachines.Core.Machine.Generator
 {
-    public class TierOneGenerator : Generator
+    public class TierOneGenerator : BaseGenerator
     {
         protected override void Fill()
         {

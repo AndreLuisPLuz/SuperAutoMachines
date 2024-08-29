@@ -1,7 +1,7 @@
 using SuperAutoMachines.Core.Battle;
 using SuperAutoMachines.Core.Match;
 
-namespace SuperAutoMachines.Core.Machine.Types
+namespace SuperAutoMachines.Core.Machine.Types.TierOne
 {
     public class Screwdriver : BaseMachine
     {

@@ -59,7 +59,7 @@ namespace SuperAutoMachines.Core.Match
 
             GameMatch.GetInstance().Coins -= 1;
 
-            MachinesOnSale = new Machine.BaseMachine?[MachinesCount];
+            MachinesOnSale = new BaseMachine?[MachinesCount];
             GenerateMachinesOnSale();
         }
 
@@ -69,6 +69,7 @@ namespace SuperAutoMachines.Core.Match
             {
                 var tierToGenerate = (GeneratorTier) Random.Shared.Next(1, (int) MaxTier);
                 MachinesOnSale[i] = MachineGenerator.Tier(tierToGenerate).RandomMachine();
+                MachinesOnSale[i].IsCpuMachine = false;
             }
         }
     }

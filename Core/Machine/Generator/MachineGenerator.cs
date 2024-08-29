@@ -1,10 +1,12 @@
-namespace SuperAutoMachines.Core.Battle.Generator
+using SuperAutoMachines.Core.Battle.Generator;
+
+namespace SuperAutoMachines.Core.Machine.Generator
 {
     public class MachineGenerator
     {
-        private static Generator generator = new TierOneGenerator();
+        private static BaseGenerator generator = new TierOneGenerator();
 
-        public static Generator Tier(GeneratorTier tier)
+        public static BaseGenerator Tier(GeneratorTier tier)
         {
             switch (tier)
             {

@@ -2,7 +2,7 @@ using SuperAutoMachines.Core.Machine;
 
 namespace SuperAutoMachines.Core.Battle.Generator
 {
-    public abstract class Generator
+    public abstract class BaseGenerator
     {
         protected List<Func<BaseMachine>> possibleMachines = new();
 

@@ -1,6 +1,8 @@
-namespace SuperAutoMachines.Core.Battle.Generator
+using SuperAutoMachines.Core.Battle.Generator;
+
+namespace SuperAutoMachines.Core.Machine.Generator
 {
-    public class TierTwoGenerator : Generator
+    public class TierTwoGenerator : BaseGenerator
     {
         protected override void Fill()
         {

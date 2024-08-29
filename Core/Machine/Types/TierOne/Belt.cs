@@ -1,16 +1,16 @@
 using SuperAutoMachines.Core.Battle;
 using SuperAutoMachines.Core.Match;
 
-namespace SuperAutoMachines.Core.Machine.Types
+namespace SuperAutoMachines.Core.Machine.Types.TierOne
 {
-    public class Hammer : BaseMachine
+    public class Belt : BaseMachine
     {
-        public Hammer(bool isCpu) : base(isCpu)
+        public Belt(bool isCpu) : base(isCpu)
         {
-            Name = "Hammer";
-            Description = "Raises Health of each machine on sale by 1 when sold.";
-            Attack = 2;
-            Health = 3;
+            Name = "Belt";
+            Description = "Gives 1 additional coin when sold.";
+            Attack = 3;
+            Health = 1;
             Tier = 1;
         }
 
@@ -26,9 +26,7 @@ namespace SuperAutoMachines.Core.Machine.Types
 
         public override void OnSell()
         {
-            var machines = GameStore.GetInstance().MachinesOnSale;
-            foreach (var machine in machines)
-                machine.Health++;
+            GameMatch.GetInstance().Coins += 1;
         }
 
         public override void OnTurn() { }
