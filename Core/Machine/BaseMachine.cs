@@ -6,6 +6,7 @@ namespace SuperAutoMachines.Core.Machine
     public abstract class BaseMachine
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public int Attack { get; set; }
         public int Health { get; set; }
         public int Tier { get; set; }
@@ -15,6 +16,7 @@ namespace SuperAutoMachines.Core.Machine
         public BaseMachine()
         {
             Name = "Not assigned";
+            Description = "Not assigned";
             Level = 1;
             Experience = 1;
         }
