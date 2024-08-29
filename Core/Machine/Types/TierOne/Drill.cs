@@ -26,14 +26,13 @@ namespace SuperAutoMachines.Core.Machine.Types.TierOne
                 : GameBattle.GetInstance().BlueTeam;
 
             var allies = team.Select(a => a.Machine)
-                    .Except([this])
                     .ToArray();
 
             if (allies.Length != 0)
             {
                 var randomIndex = Random.Shared.Next(0, allies.Length - 1);
-                allies[randomIndex].Attack += 2;
-                allies[randomIndex].Health += 1;
+                team.ToArray()[randomIndex].CurrentAttack += 2;
+                team.ToArray()[randomIndex].CurrentHealth += 1;
             }
         }
 
