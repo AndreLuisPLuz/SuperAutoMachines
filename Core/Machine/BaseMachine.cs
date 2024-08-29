@@ -23,10 +23,9 @@ namespace SuperAutoMachines.Core.Machine
 
         public abstract void OnPrep();
 
-        public virtual void OnSell()
-        {
-            GameMatch.GetInstance().Coins++;
-        }
+        public abstract void OnBuy();
+
+        public abstract void OnSell();
 
         public abstract void OnBattle();
 

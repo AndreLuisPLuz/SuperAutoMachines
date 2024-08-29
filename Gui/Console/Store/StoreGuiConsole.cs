@@ -184,7 +184,7 @@ namespace SuperAutoMachines.Gui.Console.Store
 
                 if (team[i] is not null)
                 {
-                    var machineButton = new ConsoleButton(i+1, representation, new BuyCommand(i));
+                    var machineButton = new ConsoleButton(i+1, representation, new SellCommand(i));
                     sellButtonMap.Add(machineButton.Option, machineButton);
                 }
 

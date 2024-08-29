@@ -3,7 +3,6 @@ C:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net7.0\SuperAutoM
 C:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net7.0\SuperAutoMachines.runtimeconfig.json
 c:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net7.0\SuperAutoMachines.dll
 c:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net7.0\SuperAutoMachines.pdb
-c:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.csproj.AssemblyReference.cache
 c:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.GeneratedMSBuildEditorConfig.editorconfig
 c:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.AssemblyInfoInputs.cache
 c:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.AssemblyInfo.cs
@@ -13,3 +12,4 @@ c:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\refint\Sup
 c:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.pdb
 C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.genruntimeconfig.cache
 C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\ref\SuperAutoMachines.dll
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.sourcelink.json
