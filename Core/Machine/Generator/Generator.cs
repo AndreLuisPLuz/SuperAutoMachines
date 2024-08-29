@@ -4,11 +4,11 @@ namespace SuperAutoMachines.Core.Battle.Generator
 {
     public abstract class Generator
     {
-        protected List<Func<BaseMachine>> possibleMachines = new();
+        protected List<Func<Machine.Machine>> possibleMachines = new();
 
         protected abstract void Fill();
 
-        public BaseMachine RandomMachine()
+        public Machine.Machine RandomMachine()
         {
             if (possibleMachines.Count == 0)
                 Fill();

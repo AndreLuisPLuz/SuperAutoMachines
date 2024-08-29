@@ -3,7 +3,7 @@ using SuperAutoMachines.Core.Match;
 
 namespace SuperAutoMachines.Core.Machine.Types
 {
-    public class Belt : BaseMachine
+    public class Belt : Machine
     {
         public Belt() : base()
         {

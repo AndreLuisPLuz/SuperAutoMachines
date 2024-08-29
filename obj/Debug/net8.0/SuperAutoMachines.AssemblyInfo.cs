@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SuperAutoMachines")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa38b8f04b67d7152c0a8024c354bf49a2e7f222")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6479a51f6cb8372727948820821f86d1658635b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SuperAutoMachines")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SuperAutoMachines")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

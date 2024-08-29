@@ -2,7 +2,7 @@ using SuperAutoMachines.Core.Battle;
 
 namespace SuperAutoMachines.Core.Machine.Types
 {
-    public class Screwdriver : BaseMachine
+    public class Screwdriver : Machine
     {
         public Screwdriver() : base()
         {

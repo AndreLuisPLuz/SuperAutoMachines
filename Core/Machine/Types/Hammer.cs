@@ -2,7 +2,7 @@ using SuperAutoMachines.Core.Battle;
 
 namespace SuperAutoMachines.Core.Machine.Types
 {
-    public class Hammer : BaseMachine
+    public class Hammer : Machine
     {
         public Hammer() : base()
         {

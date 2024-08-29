@@ -3,7 +3,7 @@ using SuperAutoMachines.Core.Match;
 
 namespace SuperAutoMachines.Core.Machine
 {
-    public abstract class BaseMachine
+    public abstract class Machine
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -13,7 +13,7 @@ namespace SuperAutoMachines.Core.Machine
         public int Level { get; set; }
         public int Experience { get; set; }
 
-        public BaseMachine()
+        public Machine()
         {
             Name = "Not assigned";
             Description = "Not assigned";

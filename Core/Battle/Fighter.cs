@@ -4,13 +4,13 @@ namespace SuperAutoMachines.Core.Battle
 {
     public class Fighter
     {
-        private readonly BaseMachine machine;
+        private readonly Machine.Machine machine;
         public int CurrentAttack { get; set; }
         public int CurrentHealth { get; set; }
         public bool IsAlive { get; set; } = true;
         public string Name => machine.Name;
 
-        public Fighter(BaseMachine machine)
+        public Fighter(Machine.Machine machine)
         {
             this.machine = machine;
 

@@ -12,7 +12,7 @@ namespace SuperAutoMachines.Core.Match
         public int Trophies { get; set; }
         public int Round { get; set; }
 
-        public BaseMachine?[] PlayerTeam;
+        public Machine.Machine?[] PlayerTeam;
 
         private GameMatch()
         {
@@ -21,7 +21,7 @@ namespace SuperAutoMachines.Core.Match
             Trophies = 0;
             Round = 1;
 
-            PlayerTeam = new BaseMachine[5];
+            PlayerTeam = new Machine.Machine[5];
         }
 
         public static GameMatch GetInstance()
@@ -30,7 +30,7 @@ namespace SuperAutoMachines.Core.Match
             return match;
         }
 
-        public void AddMachine(BaseMachine machine, int position)
+        public void AddMachine(Machine.Machine machine, int position)
         {
             if (PlayerTeam[position] is not null)
                 throw new InvalidOperationException("Spot already occupied!");
@@ -38,7 +38,7 @@ namespace SuperAutoMachines.Core.Match
             PlayerTeam[position] = machine;
         }
 
-        public bool TryRemoveMachine(int position, out BaseMachine? machine)
+        public bool TryRemoveMachine(int position, out Machine.Machine? machine)
         {
             machine = PlayerTeam[position];
 

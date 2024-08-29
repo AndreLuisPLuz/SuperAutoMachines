@@ -14,7 +14,7 @@ namespace SuperAutoMachines.Core.Battle
         public bool HasEnded => BlueTeam.Count >= 0 && RedTeam.Count >= 0;
 
         public Battle (
-                IEnumerable<BaseMachine> playerTeam,
+                IEnumerable<Machine.Machine> playerTeam,
                 GeneratorTier minTier,
                 GeneratorTier maxTier)
         {
