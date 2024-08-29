@@ -22,8 +22,8 @@ namespace SuperAutoMachines.Core.Machine.Types.TierOne
         public override void OnDeath()
         {
             var team = IsCpuMachine
-                ? GameBattle.GetInstance().RedTeam
-                : GameBattle.GetInstance().BlueTeam;
+                ? GameBattle.NextRound().RedTeam
+                : GameBattle.NextRound().BlueTeam;
 
             var allies = team.Select(a => a.Machine)
                     .ToArray();

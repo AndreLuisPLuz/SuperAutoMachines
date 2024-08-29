@@ -14,7 +14,6 @@ namespace SuperAutoMachines.Gui.Console.Store.Commands
 
         public async Task Execute()
         {
-            System.Console.WriteLine(indexToSell);
             GameStore.SellMachine(indexToSell);
             await StoreGuiConsole.GetInstance().DrawMenuAndAwait();
         }

@@ -28,8 +28,8 @@ namespace SuperAutoMachines.Core.Machine.Types.TierTwo
         public override void OnDeath()
         {
             var team = IsCpuMachine
-                ? GameBattle.GetInstance().RedTeam
-                : GameBattle.GetInstance().BlueTeam;
+                ? GameBattle.NextRound().RedTeam
+                : GameBattle.NextRound().BlueTeam;
             
             var rearAllies = team.SkipLast(1).TakeLast(2);
             foreach(var ally in rearAllies)

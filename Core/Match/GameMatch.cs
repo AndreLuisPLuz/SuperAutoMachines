@@ -1,6 +1,5 @@
-using System.Collections;
-using SuperAutoMachines.Core.Battle.Generator;
-using SuperAutoMachines.Core.Machine;
+using SuperAutoMachines.Core.Battle;
+using SuperAutoMachines.Core.Machine.Generator;
 
 namespace SuperAutoMachines.Core.Match
 {
@@ -32,6 +31,15 @@ namespace SuperAutoMachines.Core.Match
             return match;
         }
 
+        public void NewRound()
+        {
+            foreach (var machine in PlayerTeam)
+                machine?.OnPrep();
+
+            MaxTier = (GeneratorTier) (Round / 2);
+            Round++;
+        }
+
         public void AddMachine(Machine.BaseMachine machine, int position)
         {
             if (PlayerTeam[position] is not null)
@@ -51,6 +59,12 @@ namespace SuperAutoMachines.Core.Match
             }
 
             return false;
+        }
+
+        public static void GotoBattle()
+        {
+            GameBattle.NextRound();
+            GameBattle.GetInstance().Solve();
         }
     }
 }

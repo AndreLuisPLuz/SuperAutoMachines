@@ -1,8 +1,5 @@
-using SuperAutoMachines.Core.Battle.Generator;
-using SuperAutoMachines.Core.Machine;
+using SuperAutoMachines.Core.Machine.Generator;
 using SuperAutoMachines.Core.Match;
-using SuperAutoMachines.Gui;
-using SuperAutoMachines.Gui.Factories;
 
 namespace SuperAutoMachines.Core.Battle
 {
@@ -13,8 +10,8 @@ namespace SuperAutoMachines.Core.Battle
         private Queue<BattleEvent> events = new();
         private readonly Stack<Fighter> blueTeam = new();
         private readonly Stack<Fighter> redTeam = new();
-        private int round = 1;
 
+        public static int Round { get; private set; }
         public BattleEvent CurrentEvent => events.Peek();
         public Stack<Fighter> BlueTeam => blueTeam;
         public Stack<Fighter> RedTeam => redTeam;
@@ -47,16 +44,19 @@ namespace SuperAutoMachines.Core.Battle
                 GameMatch.GetInstance().PlayerTeam,
                 GeneratorTier.ONE,
                 GameMatch.GetInstance().MaxTier);
-
+            
             return battle;
         }
 
-        public void Reset()
+        public static GameBattle NextRound()
         {
             battle = new(
                 GameMatch.GetInstance().PlayerTeam,
                 GeneratorTier.ONE,
                 GameMatch.GetInstance().MaxTier);
+
+            Round++;
+            return battle;
         }
 
         public BattleResult Solve()
@@ -95,7 +95,7 @@ namespace SuperAutoMachines.Core.Battle
         private void HandleFight()
         {
             NewEvent();
-            CurrentEvent.RegisterAction($"[Round {round} begins]");
+            CurrentEvent.RegisterAction($"[Round {Round} begins]");
 
             var blueFighter = blueTeam.Peek();
             var redFighter = redTeam.Peek();
