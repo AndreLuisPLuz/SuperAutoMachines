@@ -18,7 +18,10 @@ namespace SuperAutoMachines.Core.Battle
             CurrentHealth = machine.Health;
         }
 
-        public void BattleStart() => machine.OnBattle();
+        public void BattleStart()
+        {
+            machine.OnBattle();
+        }
 
         public void TakeTurn() => machine.OnTurn();
 

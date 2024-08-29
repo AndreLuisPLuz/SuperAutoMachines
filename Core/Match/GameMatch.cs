@@ -1,4 +1,5 @@
 using System.Collections;
+using SuperAutoMachines.Core.Battle.Generator;
 using SuperAutoMachines.Core.Machine;
 
 namespace SuperAutoMachines.Core.Match
@@ -10,7 +11,8 @@ namespace SuperAutoMachines.Core.Match
         public int Coins { get; set; }
         public int Hearts { get; set; }
         public int Trophies { get; set; }
-        public int Round { get; set; }
+        public int Round { get; private set; }
+        public GeneratorTier MaxTier { get; private set; }
 
         public Machine.Machine?[] PlayerTeam;
 

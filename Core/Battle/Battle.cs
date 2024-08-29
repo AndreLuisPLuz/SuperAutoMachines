@@ -1,19 +1,26 @@
 using SuperAutoMachines.Core.Battle.Generator;
 using SuperAutoMachines.Core.Machine;
+using SuperAutoMachines.Core.Match;
+using SuperAutoMachines.Gui;
+using SuperAutoMachines.Gui.Factories;
 
 namespace SuperAutoMachines.Core.Battle
 {
     public class Battle
     {
+        private static Battle battle;
+
+        private Queue<BattleEvent> events = new();
         private readonly Stack<Fighter> blueTeam = new();
         private readonly Stack<Fighter> redTeam = new();
+        private int round = 1;
 
+        public BattleEvent CurrentEvent => events.Peek();
         public Stack<Fighter> BlueTeam => blueTeam;
         public Stack<Fighter> RedTeam => redTeam;
-
         public bool HasEnded => BlueTeam.Count >= 0 && RedTeam.Count >= 0;
 
-        public Battle (
+        private Battle (
                 IEnumerable<Machine.Machine> playerTeam,
                 GeneratorTier minTier,
                 GeneratorTier maxTier)
@@ -34,6 +41,24 @@ namespace SuperAutoMachines.Core.Battle
             }
         }
 
+        public Battle GetInstance()
+        {
+            battle ??= new(
+                GameMatch.GetInstance().PlayerTeam,
+                GeneratorTier.ONE,
+                GameMatch.GetInstance().MaxTier);
+
+            return battle;
+        }
+
+        public void Reset()
+        {
+            battle = new(
+                GameMatch.GetInstance().PlayerTeam,
+                GeneratorTier.ONE,
+                GameMatch.GetInstance().MaxTier);
+        }
+
         public BattleResult Solve()
         {
             HandleBattleStart();
@@ -44,8 +69,10 @@ namespace SuperAutoMachines.Core.Battle
                 HandleConsequences();
             }
 
-            if (BlueTeam.Count > 0)
+            if (BlueTeam.Count > 0){
+                GameMatch.GetInstance().Trophies += 1;//
                 return BattleResult.WIN;
+            }
             
             if (RedTeam.Count > 0)
                 return BattleResult.LOSE;
@@ -55,6 +82,9 @@ namespace SuperAutoMachines.Core.Battle
 
         private void HandleBattleStart()
         {
+            NewEvent();
+            CurrentEvent.RegisterAction("[Battle has started]");
+
             foreach (var fighter in BlueTeam)
                 fighter.BattleStart();
             
@@ -64,6 +94,9 @@ namespace SuperAutoMachines.Core.Battle
 
         private void HandleFight()
         {
+            NewEvent();
+            CurrentEvent.RegisterAction($"[Round {round} begins]");
+
             var blueFighter = blueTeam.Peek();
             var redFighter = redTeam.Peek();
 
@@ -73,12 +106,26 @@ namespace SuperAutoMachines.Core.Battle
 
         private void HandleConsequences()
         {
-            if (!blueTeam.Peek().IsAlive)
+            NewEvent();
+            CurrentEvent.RegisterAction($"[Aftermath]");
+
+            var blueFighter = blueTeam.Peek();
+            var redFighter = redTeam.Peek();
+
+            if (blueFighter.IsAlive)
+            {
+                CurrentEvent.RegisterAction($"Blue fighter, {blueFighter.Name}, was defeated.");
                 blueTeam.Pop();
+            }
             
-            if (!redTeam.Peek().IsAlive)
+            if (redFighter.IsAlive)
+            {
+                CurrentEvent.RegisterAction($"Red fighter, {redFighter.Name}, was defeated.");
                 redTeam.Pop();
+            }
         }
+
+        private void NewEvent() => events.Enqueue(new BattleEvent());
     }
 
     public enum BattleResult
