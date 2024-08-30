@@ -1,0 +1,45 @@
+using SuperAutoMachines.Core.Battle;
+
+namespace SuperAutoMachines.Core.Machine.Types.TierOne
+{
+    public class Drill : BaseMachine
+    {
+        public Drill(bool isCpu) : base(isCpu)
+        {
+            Name = "Drill";
+            Description = "Raises Attack and Health of a random ally by 2/1 when defeated. Lasts as long as the battle goes on.";
+            Attack = 2;
+            Health = 1;
+            Tier = 1;
+        }
+
+        public override void OnAttack(Fighter enemy) { }
+
+        public override void OnBattle() { }
+
+        public override void OnBuy() { }
+
+        public override void OnDeath()
+        {
+            var team = IsCpuMachine
+                ? GameBattle.NextRound().RedTeam
+                : GameBattle.NextRound().BlueTeam;
+
+            var allies = team.Select(a => a.Machine)
+                    .ToArray();
+
+            if (allies.Length != 0)
+            {
+                var randomIndex = Random.Shared.Next(0, allies.Length - 1);
+                team.ToArray()[randomIndex].CurrentAttack += 2;
+                team.ToArray()[randomIndex].CurrentHealth += 1;
+            }
+        }
+
+        public override void OnPrep() { }
+
+        public override void OnSell() { }
+
+        public override void OnTurn() { }
+    }
+}

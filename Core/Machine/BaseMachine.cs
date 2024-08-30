@@ -12,21 +12,22 @@ namespace SuperAutoMachines.Core.Machine
         public int Tier { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }
+        public bool IsCpuMachine { get; set; }
 
-        public BaseMachine()
+        public BaseMachine(bool isCpu)
         {
             Name = "Not assigned";
             Description = "Not assigned";
             Level = 1;
             Experience = 1;
+            IsCpuMachine = isCpu;
         }
 
         public abstract void OnPrep();
 
-        public virtual void OnSell()
-        {
-            GameMatch.GetInstance().Coins++;
-        }
+        public abstract void OnBuy();
+
+        public abstract void OnSell();
 
         public abstract void OnBattle();
 

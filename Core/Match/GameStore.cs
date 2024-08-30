@@ -33,6 +33,7 @@ namespace SuperAutoMachines.Core.Match
             if (GameMatch.GetInstance().Coins < 3)
                 throw new InvalidOperationException("Insufficient coins!");
 
+            machine.OnBuy();
             MachinesOnSale[index] = null;
             MachinesCount -= 1;
 
@@ -41,9 +42,14 @@ namespace SuperAutoMachines.Core.Match
             return machine;
         }
 
-        public void SellMachine(int index)
+        public static void SellMachine(int index)
         {
-            bool sucess = GameMatch.GetInstance().TryRemoveMachine(index, out var machine);
+            bool success = GameMatch.GetInstance().TryRemoveMachine(index, out var machine);
+            if (success)
+            {
+                machine.OnSell();
+                GameMatch.GetInstance().Coins++;
+            }
         }
 
         public void Reroll()
@@ -63,6 +69,7 @@ namespace SuperAutoMachines.Core.Match
             {
                 var tierToGenerate = (GeneratorTier) Random.Shared.Next(1, (int) MaxTier);
                 MachinesOnSale[i] = MachineGenerator.Tier(tierToGenerate).RandomMachine();
+                MachinesOnSale[i].IsCpuMachine = false;
             }
         }
     }

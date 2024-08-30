@@ -5,9 +5,12 @@ namespace SuperAutoMachines.Core.Battle
     public class Fighter
     {
         private readonly BaseMachine machine;
+
         public int CurrentAttack { get; set; }
         public int CurrentHealth { get; set; }
         public bool IsAlive { get; set; } = true;
+        
+        public BaseMachine Machine => machine;
         public string Name => machine.Name;
 
         public Fighter(BaseMachine machine)
@@ -18,7 +21,10 @@ namespace SuperAutoMachines.Core.Battle
             CurrentHealth = machine.Health;
         }
 
-        public void BattleStart() => machine.OnBattle();
+        public void BattleStart()
+        {
+            machine.OnBattle();
+        }
 
         public void TakeTurn() => machine.OnTurn();
 

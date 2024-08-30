@@ -1,5 +1,5 @@
-using System.Collections;
-using SuperAutoMachines.Core.Machine;
+using SuperAutoMachines.Core.Battle;
+using SuperAutoMachines.Core.Machine.Generator;
 
 namespace SuperAutoMachines.Core.Match
 {
@@ -10,9 +10,10 @@ namespace SuperAutoMachines.Core.Match
         public int Coins { get; set; }
         public int Hearts { get; set; }
         public int Trophies { get; set; }
-        public int Round { get; set; }
+        public int Round { get; private set; }
+        public GeneratorTier MaxTier { get; private set; }
 
-        public BaseMachine?[] PlayerTeam;
+        public Machine.BaseMachine?[] PlayerTeam;
 
         private GameMatch()
         {
@@ -21,7 +22,7 @@ namespace SuperAutoMachines.Core.Match
             Trophies = 0;
             Round = 1;
 
-            PlayerTeam = new BaseMachine[5];
+            PlayerTeam = new Machine.BaseMachine[5];
         }
 
         public static GameMatch GetInstance()
@@ -30,7 +31,16 @@ namespace SuperAutoMachines.Core.Match
             return match;
         }
 
-        public void AddMachine(BaseMachine machine, int position)
+        public void NewRound()
+        {
+            foreach (var machine in PlayerTeam)
+                machine?.OnPrep();
+
+            MaxTier = (GeneratorTier) (Round / 2);
+            Round++;
+        }
+
+        public void AddMachine(Machine.BaseMachine machine, int position)
         {
             if (PlayerTeam[position] is not null)
                 throw new InvalidOperationException("Spot already occupied!");
@@ -38,7 +48,7 @@ namespace SuperAutoMachines.Core.Match
             PlayerTeam[position] = machine;
         }
 
-        public bool TryRemoveMachine(int position, out BaseMachine? machine)
+        public bool TryRemoveMachine(int position, out Machine.BaseMachine? machine)
         {
             machine = PlayerTeam[position];
 
@@ -49,6 +59,12 @@ namespace SuperAutoMachines.Core.Match
             }
 
             return false;
+        }
+
+        public static void GotoBattle()
+        {
+            GameBattle.NextRound();
+            GameBattle.GetInstance().Solve();
         }
     }
 }

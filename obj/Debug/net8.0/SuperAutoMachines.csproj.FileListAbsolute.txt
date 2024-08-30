@@ -1,0 +1,15 @@
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net8.0\SuperAutoMachines.exe
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net8.0\SuperAutoMachines.deps.json
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net8.0\SuperAutoMachines.runtimeconfig.json
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net8.0\SuperAutoMachines.dll
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\bin\Debug\net8.0\SuperAutoMachines.pdb
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.AssemblyInfoInputs.cache
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.AssemblyInfo.cs
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.csproj.CoreCompileInputs.cache
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.sourcelink.json
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.dll
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\refint\SuperAutoMachines.dll
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.pdb
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\SuperAutoMachines.genruntimeconfig.cache
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net8.0\ref\SuperAutoMachines.dll

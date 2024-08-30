@@ -1,16 +1,17 @@
-using SuperAutoMachines.Core.Machine;
-using SuperAutoMachines.Core.Machine.Types;
+using SuperAutoMachines.Core.Battle.Generator;
+using SuperAutoMachines.Core.Machine.Types.TierOne;
 
-namespace SuperAutoMachines.Core.Battle.Generator
+namespace SuperAutoMachines.Core.Machine.Generator
 {
-    public class TierOneGenerator : Generator
+    public class TierOneGenerator : BaseGenerator
     {
         protected override void Fill()
         {
             possibleMachines.Clear();
-            possibleMachines.Add(() => new Belt());
-            possibleMachines.Add(() => new Hammer());
-            possibleMachines.Add(() => new Screwdriver());
+            possibleMachines.Add(() => new Belt(true));
+            possibleMachines.Add(() => new Hammer(true));
+            possibleMachines.Add(() => new Screwdriver(true));
+            possibleMachines.Add(() => new Drill(true));
         }
     }
 }
