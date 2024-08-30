@@ -13,7 +13,7 @@ namespace SuperAutoMachines.Gui.Factories
 
             return systemSetting.Value switch
             {
-                "Console" => new BattleGuiConsole(),
+                "Console" => BattleGuiConsole.GetInstance(),
                 _ => throw new NotSupportedException($"System setting {systemSetting}"),
             };
         }

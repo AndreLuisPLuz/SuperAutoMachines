@@ -23,6 +23,7 @@ namespace SuperAutoMachines.Core.Match
             Hearts = 5;
             Trophies = 0;
             Round = 1;
+            MaxTier = GeneratorTier.ONE;
 
             PlayerTeam = new BaseMachine[5];
         }
@@ -38,8 +39,8 @@ namespace SuperAutoMachines.Core.Match
             foreach (var machine in PlayerTeam)
                 machine?.OnPrep();
 
-            MaxTier = (GeneratorTier) (Round / 2);
             Round++;
+            MaxTier = (GeneratorTier) (Round / 2) + 1;
         }
 
         public void AddMachine(BaseMachine machine, int position)

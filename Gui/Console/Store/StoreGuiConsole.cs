@@ -35,10 +35,8 @@ namespace SuperAutoMachines.Gui.Console.Store
             menuButtonMap.Add(gobackButton.Option, gobackButton);
 
             cancelBuyButton = new ConsoleButton(9, "Go back.", new StartGotoCommand());
-            buyButtonMap.Add(cancelBuyButton.Option, cancelBuyButton);
 
             cancelSellButton = new ConsoleButton(9, "Go back.", new StartGotoCommand());
-            sellButtonMap.Add(cancelSellButton.Option, cancelSellButton);
         }
 
         public static StoreGuiConsole GetInstance()
@@ -94,6 +92,7 @@ namespace SuperAutoMachines.Gui.Console.Store
             var coins = GameMatch.GetInstance().Coins;
             System.Console.WriteLine($"{coins} Coins");
 
+            buyButtonMap.Clear();
             System.Console.WriteLine("\nMachines on sale:");
 
             var store = GameStore.GetInstance().MachinesOnSale;
@@ -114,6 +113,8 @@ namespace SuperAutoMachines.Gui.Console.Store
 
                 System.Console.WriteLine($"[{representation} {attack}/{health}] - [{description}]");
             }
+
+            buyButtonMap.Add(cancelBuyButton.Option, cancelBuyButton);
 
             System.Console.WriteLine("\n\n=================================== OPTIONS ===================================");
             foreach (var key in buyButtonMap.Keys)
@@ -174,6 +175,8 @@ namespace SuperAutoMachines.Gui.Console.Store
 
             System.Console.WriteLine("\nYour team:");
 
+            sellButtonMap.Clear();
+
             var team = GameMatch.GetInstance().PlayerTeam;
             for (int i = 0; i < team.Length; i++)
             {
@@ -190,6 +193,8 @@ namespace SuperAutoMachines.Gui.Console.Store
 
                 System.Console.WriteLine($"[{representation} {attack}/{health}] - [{description}]");
             }
+
+            sellButtonMap.Add(cancelSellButton.Option, cancelSellButton);
 
             System.Console.WriteLine("\n\n=================================== OPTIONS ===================================");
             foreach (var key in sellButtonMap.Keys)

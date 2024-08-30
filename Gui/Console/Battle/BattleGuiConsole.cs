@@ -30,6 +30,9 @@ namespace SuperAutoMachines.Gui.Console.Battle
             while (battleEvents.Count > 0)
             {
                 var e = battleEvents.Dequeue();
+
+                System.Console.WriteLine($"\n{e.Header}");
+
                 var blueTeam = e.BlueTeam;
                 var redTeam = e.RedTeam.Reverse();
 

@@ -17,13 +17,16 @@ namespace SuperAutoMachines.Core.Battle
         public BattleEvent CurrentEvent => Events.Peek();
         public Stack<Fighter> BlueTeam => blueTeam;
         public Stack<Fighter> RedTeam => redTeam;
-        public bool HasEnded => BlueTeam.Count >= 0 && RedTeam.Count >= 0;
+        public bool HasEnded => BlueTeam.Count == 0 || RedTeam.Count == 0;
 
         private GameBattle (
                 IEnumerable<BaseMachine?> playerTeam,
                 GeneratorTier minTier,
                 GeneratorTier maxTier)
         {
+            Console.WriteLine(minTier);
+            Console.WriteLine(maxTier);
+
             foreach (var machine in playerTeam)
             {
                 if (machine is not null)
@@ -38,6 +41,8 @@ namespace SuperAutoMachines.Core.Battle
 
                 redTeam.Push(new Fighter(RandomMachine));
             }
+
+            Round = 1;
         }
 
         public static GameBattle GetInstance()
@@ -50,15 +55,12 @@ namespace SuperAutoMachines.Core.Battle
             return battle;
         }
 
-        public static GameBattle NextRound()
+        public static void NextRound()
         {
             battle = new(
                 GameMatch.GetInstance().PlayerTeam,
                 GeneratorTier.ONE,
                 GameMatch.GetInstance().MaxTier);
-
-            Round++;
-            return battle;
         }
 
         public BattleResult Solve()
@@ -69,6 +71,7 @@ namespace SuperAutoMachines.Core.Battle
             {
                 HandleFight();
                 HandleConsequences();
+                Round++;
             }
 
             if (BlueTeam.Count > 0)
@@ -82,8 +85,7 @@ namespace SuperAutoMachines.Core.Battle
 
         private void HandleBattleStart()
         {
-            NewEvent();
-            CurrentEvent.RegisterAction("[Battle has started]");
+            NewEvent("[Battle has started]");
 
             foreach (var fighter in BlueTeam)
                 fighter.BattleStart();
@@ -94,8 +96,7 @@ namespace SuperAutoMachines.Core.Battle
 
         private void HandleFight()
         {
-            NewEvent();
-            CurrentEvent.RegisterAction($"[Round {Round} begins]");
+            NewEvent($"[Round {Round} begins]");
 
             var blueFighter = blueTeam.Peek();
             var redFighter = redTeam.Peek();
@@ -106,26 +107,25 @@ namespace SuperAutoMachines.Core.Battle
 
         private void HandleConsequences()
         {
-            NewEvent();
-            CurrentEvent.RegisterAction($"[Aftermath]");
+            NewEvent($"[Round {Round} aftermath]");
 
             var blueFighter = blueTeam.Peek();
             var redFighter = redTeam.Peek();
 
-            if (blueFighter.IsAlive)
+            if (!blueFighter.IsAlive)
             {
                 CurrentEvent.RegisterAction($"Blue fighter, {blueFighter.Name}, was defeated.");
                 blueTeam.Pop();
             }
             
-            if (redFighter.IsAlive)
+            if (!redFighter.IsAlive)
             {
                 CurrentEvent.RegisterAction($"Red fighter, {redFighter.Name}, was defeated.");
                 redTeam.Pop();
             }
         }
 
-        private void NewEvent() => Events.Enqueue(new BattleEvent());
+        private void NewEvent(string header) => Events.Enqueue(new BattleEvent(header));
     }
 
     public enum BattleResult
