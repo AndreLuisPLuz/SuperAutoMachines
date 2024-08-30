@@ -22,7 +22,10 @@ namespace SuperAutoMachines.Core.Machine.Types.TierTwo
             var ally = team.SkipLast(1).Last();
 
             if (ally is not null)
+            {
                 ally.CurrentHealth -= 1;
+                GameBattle.GetInstance().CurrentEvent.RegisterAction($"Column Drill causes damage on his ally, {ally.Name}!");
+            }
         }
 
         public override void OnBattle()

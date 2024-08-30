@@ -10,7 +10,7 @@ namespace SuperAutoMachines.Core.Machine.Generator
             possibleMachines.Clear();
             possibleMachines.Add(() => new ColumnDrill(true));
             possibleMachines.Add(() => new GasOven(true));
-            possibleMachines.Add(() => new FlatGrindind(true));
+            possibleMachines.Add(() => new FlatGrinder(true));
         }
     }
 }

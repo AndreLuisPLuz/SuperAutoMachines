@@ -31,9 +31,17 @@ namespace SuperAutoMachines.Core.Machine.Types.TierOne
             if (allies.Length != 0)
             {
                 var randomIndex = Random.Shared.Next(0, allies.Length - 1);
-                team.ToArray()[randomIndex].CurrentAttack += 2;
-                team.ToArray()[randomIndex].CurrentHealth += 1;
+                var ally = team.ToArray()[randomIndex];
+
+                ally.CurrentAttack += 2;
+                ally.CurrentHealth += 1;
+
+                GameBattle.GetInstance()
+                        .CurrentEvent
+                        .RegisterAction(
+                            $"Drill raised {ally.Name}'s attack and health before his defeat!");
             }
+
         }
 
         public override void OnPrep() { }
