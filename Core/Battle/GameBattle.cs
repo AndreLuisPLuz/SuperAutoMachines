@@ -6,7 +6,7 @@ namespace SuperAutoMachines.Core.Battle
 {
     public class GameBattle
     {
-        private static GameBattle battle;
+        private static GameBattle? battle;
 
         private readonly Stack<Fighter> blueTeam = new();
         private readonly Stack<Fighter> redTeam = new();

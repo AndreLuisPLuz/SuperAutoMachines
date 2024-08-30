@@ -94,7 +94,7 @@ namespace SuperAutoMachines.Core.Match
             PlayerTeam[position] = fusion;
         }
 
-        public void GotoBattle()
+        public void DoBattle()
         {
             GameBattle.NextRound();
             var battleResult = GameBattle.GetInstance().Solve();

@@ -6,7 +6,20 @@ namespace SuperAutoMachines.Gui.Console.Battle
 {
     public class BattleGuiConsole : IBattleGui
     {
-        private readonly MatchGotoCommand command = new();
+        private static BattleGuiConsole? console;
+
+        private readonly MatchGotoCommand command;
+
+        private BattleGuiConsole()
+        {
+            command = new MatchGotoCommand();
+        }
+
+        public static BattleGuiConsole GetInstance()
+        {
+            console ??= new();
+            return console;
+        }
 
         public async Task DrawBattleAndAwait()
         {
