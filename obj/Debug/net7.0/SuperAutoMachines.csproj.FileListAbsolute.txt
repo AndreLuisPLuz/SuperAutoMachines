@@ -13,3 +13,4 @@ c:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoM
 C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.genruntimeconfig.cache
 C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\ref\SuperAutoMachines.dll
 C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.sourcelink.json
+C:\Users\disrct\Documents\Projects\SuperAutoMachines\obj\Debug\net7.0\SuperAutoMachines.csproj.AssemblyReference.cache

@@ -2,11 +2,19 @@ namespace SuperAutoMachines.Core.Battle
 {
     public class BattleEvent
     {
-        public Queue<string> actionsTaken = new();
+        public Fighter[] BlueTeam;
+        public Fighter[] RedTeam;
+        public Queue<string> ActionsTaken = new();
+
+        public BattleEvent()
+        {
+            BlueTeam = GameBattle.GetInstance().BlueTeam.ToArray();
+            RedTeam = GameBattle.GetInstance().RedTeam.ToArray();
+        }
 
         public void RegisterAction(string newAction)
         {
-            actionsTaken.Enqueue(newAction);
+            ActionsTaken.Enqueue(newAction);
         }
     }
 }

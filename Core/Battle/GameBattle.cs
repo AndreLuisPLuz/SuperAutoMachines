@@ -1,3 +1,4 @@
+using SuperAutoMachines.Core.Machine;
 using SuperAutoMachines.Core.Machine.Generator;
 using SuperAutoMachines.Core.Match;
 
@@ -7,18 +8,19 @@ namespace SuperAutoMachines.Core.Battle
     {
         private static GameBattle battle;
 
-        private Queue<BattleEvent> events = new();
         private readonly Stack<Fighter> blueTeam = new();
         private readonly Stack<Fighter> redTeam = new();
 
         public static int Round { get; private set; }
-        public BattleEvent CurrentEvent => events.Peek();
+
+        public Queue<BattleEvent> Events = new();
+        public BattleEvent CurrentEvent => Events.Peek();
         public Stack<Fighter> BlueTeam => blueTeam;
         public Stack<Fighter> RedTeam => redTeam;
         public bool HasEnded => BlueTeam.Count >= 0 && RedTeam.Count >= 0;
 
         private GameBattle (
-                IEnumerable<Machine.BaseMachine> playerTeam,
+                IEnumerable<BaseMachine?> playerTeam,
                 GeneratorTier minTier,
                 GeneratorTier maxTier)
         {
@@ -69,10 +71,8 @@ namespace SuperAutoMachines.Core.Battle
                 HandleConsequences();
             }
 
-            if (BlueTeam.Count > 0){
-                GameMatch.GetInstance().Trophies += 1;//
+            if (BlueTeam.Count > 0)
                 return BattleResult.WIN;
-            }
             
             if (RedTeam.Count > 0)
                 return BattleResult.LOSE;
@@ -125,7 +125,7 @@ namespace SuperAutoMachines.Core.Battle
             }
         }
 
-        private void NewEvent() => events.Enqueue(new BattleEvent());
+        private void NewEvent() => Events.Enqueue(new BattleEvent());
     }
 
     public enum BattleResult
