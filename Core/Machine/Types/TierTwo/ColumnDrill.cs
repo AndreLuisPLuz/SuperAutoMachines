@@ -16,13 +16,16 @@ namespace SuperAutoMachines.Core.Machine.Types.TierTwo
         public override void OnAttack(Fighter enemy)
         {
             var team = IsCpuMachine
-                ? GameBattle.NextRound().RedTeam
-                : GameBattle.NextRound().BlueTeam;
+                ? GameBattle.GetInstance().RedTeam
+                : GameBattle.GetInstance().BlueTeam;
             
             var ally = team.SkipLast(1).Last();
 
             if (ally is not null)
+            {
                 ally.CurrentHealth -= 1;
+                GameBattle.GetInstance().CurrentEvent.RegisterAction($"Column Drill causes damage on his ally, {ally.Name}!");
+            }
         }
 
         public override void OnBattle()

@@ -1,5 +1,5 @@
-using SuperAutoMachines.Core.Battle.Generator;
 using SuperAutoMachines.Core.Machine;
+using SuperAutoMachines.Core.Machine.Generator;
 
 namespace SuperAutoMachines.Core.Match
 {

@@ -1,4 +1,6 @@
+using System.Reflection;
 using SuperAutoMachines.Core.Battle;
+using SuperAutoMachines.Core.Machine;
 using SuperAutoMachines.Core.Machine.Generator;
 
 namespace SuperAutoMachines.Core.Match
@@ -13,7 +15,7 @@ namespace SuperAutoMachines.Core.Match
         public int Round { get; private set; }
         public GeneratorTier MaxTier { get; private set; }
 
-        public Machine.BaseMachine?[] PlayerTeam;
+        public BaseMachine?[] PlayerTeam;
 
         private GameMatch()
         {
@@ -21,8 +23,9 @@ namespace SuperAutoMachines.Core.Match
             Hearts = 5;
             Trophies = 0;
             Round = 1;
+            MaxTier = GeneratorTier.ONE;
 
-            PlayerTeam = new Machine.BaseMachine[5];
+            PlayerTeam = new BaseMachine[5];
         }
 
         public static GameMatch GetInstance()
@@ -36,19 +39,29 @@ namespace SuperAutoMachines.Core.Match
             foreach (var machine in PlayerTeam)
                 machine?.OnPrep();
 
-            MaxTier = (GeneratorTier) (Round / 2);
             Round++;
+            MaxTier = (GeneratorTier) (Round / 2) + 1;
         }
 
-        public void AddMachine(Machine.BaseMachine machine, int position)
+        public void AddMachine(BaseMachine machine, int position)
         {
-            if (PlayerTeam[position] is not null)
-                throw new InvalidOperationException("Spot already occupied!");
+            var teamMachine = PlayerTeam[position];
+
+            if (teamMachine is not null)
+            {
+                var storeMachine = machine;
+
+                if (teamMachine.Name != storeMachine.Name)
+                    throw new InvalidOperationException("Position already occupied!");
+                
+                MergeMachines(teamMachine, storeMachine, position);
+                return;
+            }
             
             PlayerTeam[position] = machine;
         }
 
-        public bool TryRemoveMachine(int position, out Machine.BaseMachine? machine)
+        public bool TryRemoveMachine(int position, out BaseMachine? machine)
         {
             machine = PlayerTeam[position];
 
@@ -61,10 +74,45 @@ namespace SuperAutoMachines.Core.Match
             return false;
         }
 
-        public static void GotoBattle()
+        public void MergeMachines(BaseMachine teamMachine, BaseMachine storeMachine, int position)
+        {
+            if (teamMachine.Level >= 3 || storeMachine.Level >= 3)
+                return;
+
+            int greaterAttack = int.Max(teamMachine.Attack, storeMachine.Attack);
+            int greaterHealth = int.Max(teamMachine.Health, storeMachine.Health);
+
+            var type = teamMachine.GetType();
+            var constructor = type.GetConstructor(new[] { typeof(bool) }) 
+                    ?? throw new NotSupportedException($"BaseMachine constructor for type {type} was not set, and therefore, is not supported.");
+
+            var fusion = (BaseMachine) constructor.Invoke(Array.Empty<object>());
+
+            fusion.Attack = greaterAttack + 1;
+            fusion.Health = greaterHealth + 1;
+            fusion.RaiseExperienceTo(teamMachine.Experience + storeMachine.Experience);
+
+            PlayerTeam[position] = fusion;
+        }
+
+        public void DoBattle()
         {
             GameBattle.NextRound();
-            GameBattle.GetInstance().Solve();
+            var battleResult = GameBattle.GetInstance().Solve();
+
+            switch (battleResult)
+            {
+                case BattleResult.WIN:
+                    Trophies++;
+                    break;
+                case BattleResult.LOSE:
+                    Hearts--;
+                    break;
+                default:
+                    break;
+            }
+
+            NewRound();
         }
     }
 }

@@ -24,10 +24,8 @@ namespace SuperAutoMachines.Gui.Console
 
         public async Task Execute()
         {
-            if (Command is null)
-                throw new InvalidOperationException("Command not set to button!");
-            
-            await Command.Execute();
+            if (Command is not null)
+                await Command.Execute();
         }
     }
 }

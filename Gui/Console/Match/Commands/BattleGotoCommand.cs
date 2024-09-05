@@ -1,10 +1,14 @@
+using SuperAutoMachines.Core.Match;
+using SuperAutoMachines.Gui.Console.Battle;
+
 namespace SuperAutoMachines.Gui.Console.Match.Commands
 {
     public class BattleGotoCommand : ICommand
     {
-        public Task Execute()
+        public async Task Execute()
         {
-            throw new NotImplementedException();
+            GameMatch.GetInstance().DoBattle();
+            await BattleGuiConsole.GetInstance().DrawBattleAndAwait();
         }
     }
 }

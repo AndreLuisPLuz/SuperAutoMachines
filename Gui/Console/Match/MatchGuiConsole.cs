@@ -6,7 +6,7 @@ namespace SuperAutoMachines.Gui.Console.Match
 {
     public class MatchGuiConsole : IMatchGui
     {
-        private static MatchGuiConsole console;
+        private static MatchGuiConsole? console;
 
         private readonly Dictionary<int, ICommand?> commandMap = new();
         private readonly ConsoleButton battleButton;

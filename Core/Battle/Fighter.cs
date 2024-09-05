@@ -30,6 +30,11 @@ namespace SuperAutoMachines.Core.Battle
 
         public void Attack(Fighter enemy)
         {
+            GameBattle.GetInstance()
+                    .CurrentEvent
+                    .RegisterAction(
+                        $"{enemy.Name} attacks {Name} for {enemy.CurrentAttack} damage!");
+
             CurrentHealth -= enemy.CurrentAttack;
             machine.OnAttack(enemy);
 

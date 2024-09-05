@@ -23,6 +23,18 @@ namespace SuperAutoMachines.Core.Machine
             IsCpuMachine = isCpu;
         }
 
+        public void RaiseExperienceTo(int exp)
+        {
+            if (Level == 3)
+                return;
+
+            if (exp > 6)
+                exp = 6;
+            
+            Experience = exp;
+            Level = (Experience / 3) + 1;
+        }
+
         public abstract void OnPrep();
 
         public abstract void OnBuy();

@@ -2,12 +2,12 @@ using SuperAutoMachines.Core.Battle;
 
 namespace SuperAutoMachines.Core.Machine.Types.TierTwo
 {
-    public class FlatGrindind : BaseMachine
+    public class FlatGrinder : BaseMachine
     {
-        public FlatGrindind(bool isCpu) : base(isCpu)
+        public FlatGrinder(bool isCpu) : base(isCpu)
         {
-            Name = "Flat Grinding";
-            Description = "Raises Attack and Health of its two rear allies by 1/1 on death.";
+            Name = "Flat Grinder";
+            Description = "Raises Attack and Health of its two rear allies by 1/1 when defeated.";
             Attack = 4;
             Health = 2;
             Tier = 2;
@@ -28,14 +28,17 @@ namespace SuperAutoMachines.Core.Machine.Types.TierTwo
         public override void OnDeath()
         {
             var team = IsCpuMachine
-                ? GameBattle.NextRound().RedTeam
-                : GameBattle.NextRound().BlueTeam;
+                ? GameBattle.GetInstance().RedTeam
+                : GameBattle.GetInstance().BlueTeam;
             
             var rearAllies = team.SkipLast(1).TakeLast(2);
             foreach(var ally in rearAllies)
             {
                 ally.CurrentAttack++;
                 ally.CurrentHealth++;
+                GameBattle.GetInstance()
+                        .CurrentEvent
+                        .RegisterAction($"Flat Grinder raises the Attack and Health of {ally.Name} before being defeated!");
             }
         }
 
